@@ -14,7 +14,8 @@ public class AppUIProvider extends UIProvider {
         if (overrideMobileUA() || userAgent.contains("mobile")) {
             return MobileUI.class;
         } else {
-            return FallbackUI.class;
+            return MobileUI.class;
+//            return FallbackUI.class;
         }
     }
     

@@ -21,6 +21,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 
 @SuppressWarnings("serial")
 public class TokkaEditView extends NavigationView implements Component {
@@ -82,6 +83,7 @@ public class TokkaEditView extends NavigationView implements Component {
             b.addClickListener(new ClickListener() {
                 public void buttonClick(ClickEvent event) {
                     current = t;
+//                    b.getUI().addWindow(confirm);
                     confirm.showRelativeTo(b);
                 }
             });
@@ -118,15 +120,18 @@ public class TokkaEditView extends NavigationView implements Component {
         confirm.setContent(v);
         confirm.setHeight("200px");
         confirm.setWidth("200px");
+        confirm.getState().setFullscreen(true);
         
         cancel.addClickListener(new ClickListener() {
             public void buttonClick(ClickEvent event) {
+//                getUI().removeWindow(confirm);
                 confirm.removeFromParent();
             }
         });
         
         ok.addClickListener(new ClickListener() {
             public void buttonClick(ClickEvent event) {
+//                getUI().removeWindow(confirm);
                 confirm.removeFromParent();
                 Tokka.getTokkaDb().remove(current);
                 refreshContent();                

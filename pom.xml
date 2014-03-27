@@ -11,6 +11,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<vaadin.version>7.1.8</vaadin.version>
+		<gwt.version>2.5.1</gwt.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -44,6 +45,7 @@
 		<dependency>
 			<groupId>com.vaadin.addon</groupId>
 			<artifactId>vaadin-touchkit-agpl</artifactId>
+			<classifier>sources</classifier>
 			<version>4.0.0.alpha2</version>
 			<type>jar</type>
 		</dependency>
@@ -72,6 +74,12 @@
 			<version>${vaadin.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client-compiler</artifactId>
+			<version>${vaadin.version}</version>
+			<scope>provided</scope>
+		</dependency>		
+		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
 			<version>6.0</version>
@@ -87,6 +95,18 @@
 		   <artifactId>messagebox</artifactId>
 		   <version>2.0.6</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>${gwt.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-dev</artifactId>
+			<version>${gwt.version}</version>
+			<scope>provided</scope>
+		</dependency>		
 	</dependencies>
 
 	<build>
@@ -126,6 +146,9 @@
 					<persistentunitcachedir>${project.build.directory}</persistentunitcachedir>
 					<deploy>${project.build.directory}/gwt-deploy</deploy>
 					<runTarget>http://localhost:8080/</runTarget>
+                                        <modules>
+                                           <module>org.apache.hupa.vaadin.gwt.AppWidgetSet</module>
+                                        </modules>
 				</configuration>
 				<executions>
 					<execution>

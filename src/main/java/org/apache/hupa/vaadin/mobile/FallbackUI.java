@@ -1,5 +1,7 @@
 package org.apache.hupa.vaadin.mobile;
 
+import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
@@ -11,10 +13,13 @@ import com.vaadin.ui.UI;
  *
  */
 @SuppressWarnings("serial")
+@Widgetset("org.apache.hupa.vaadin.gwt.AppWidgetSet")
+@Theme("reinder")
 public class FallbackUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
+        System.err.println(">>>>>>> FallbackUI");
         HorizontalLayout layout = new HorizontalLayout();
         layout.setSpacing(true);
         layout.setMargin(true);

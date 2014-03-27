@@ -17,6 +17,8 @@ import com.vaadin.ui.UI;
 public class MobileUI extends UI {
     @Override
     protected void init(VaadinRequest request) {
+        System.err.println(">>>>>>> MobileUI");
+        
         setContent(new MainView());
     }
 }

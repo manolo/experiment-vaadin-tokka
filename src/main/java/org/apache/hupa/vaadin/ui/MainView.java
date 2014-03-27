@@ -7,6 +7,7 @@ import com.vaadin.addon.touchkit.ui.NavigationManager;
 public class MainView extends NavigationManager {
 
     public MainView() {
-        setCurrentComponent(new TokkaView());
+//        setCurrentComponent(new TokkaView());
+        setCurrentComponent(new TokkaMain());
     }
 }
