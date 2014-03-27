@@ -6,6 +6,7 @@ import java.util.Collections;
 import org.apache.hupa.vaadin.gwt.client.model.Tokka;
 import org.apache.hupa.vaadin.ui.TokkaMain;
 
+import com.google.gwt.dom.client.StyleInjector;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
@@ -23,6 +24,7 @@ import com.vaadin.client.ui.AbstractHasComponentsConnector;
 import com.vaadin.client.ui.button.ButtonConnector;
 import com.vaadin.client.ui.label.LabelConnector;
 import com.vaadin.client.ui.orderedlayout.HorizontalLayoutConnector;
+import com.vaadin.server.Page;
 import com.vaadin.shared.ui.AlignmentInfo.Bits;
 import com.vaadin.shared.ui.Connect;
 import com.vaadin.shared.ui.label.LabelState;
@@ -53,6 +55,7 @@ public class TokkaMainConnector extends AbstractComponentContainerConnector {
     
     @Override
     protected Widget createWidget() {
+        injectStyles();
         navigationViewConnector = init(new NavigationViewConnector());
         navigationBarConnector = init(new NavigationBarConnector());
         
@@ -133,40 +136,48 @@ public class TokkaMainConnector extends AbstractComponentContainerConnector {
         addComponents(navigationViewConnector, navigationBarConnector, content);
     }
 
-private HorizontalLayoutConnector createRow(String name, int done, int total) {
-        
+    private HorizontalLayoutConnector createRow(String name, int done, int total) {
+
         LabelConnector lName = init(new LabelConnector());
         LabelState s = lName.getState();
         s.text = name;
-        s.styles = Arrays.asList("toka-row");
+        s.styles = Arrays.asList("tokka-row");
         s.height = s.width = "100%";
+        s.width = "10em";
 
         LabelConnector lDone = init(new LabelConnector());
-        s = lName.getState();
-        s.text = name;
-        s.styles = Arrays.asList("toka-row", "toka-done");
+        s = lDone.getState();
+        s.text = done + "/" + total;
+        s.styles = Arrays.asList("tokka-row", "tokka-done");
         s.width = "3em";
         s.height = "100%";
 
-        LabelConnector lEmty = init(new LabelConnector());
-        s = lEmty.getState();
-        s.text = name;
+        LabelConnector lEpmty = init(new LabelConnector());
+        s = lEpmty.getState();
         s.width = "1.5em";
         s.height = "100%";
-        
+
         HorizontalLayoutConnector h = init(new HorizontalLayoutConnector());
         HorizontalLayoutState hs = h.getState();
         hs.height = "100%";
         hs.width = "100%";
-        
-        addComponents(h, lName, lDone, lEmty);
+
+        addComponents(h, lName, lDone, lEpmty);
         h.getState().childData.get(lName).alignmentBitmask = Bits.ALIGNMENT_LEFT;
         h.getState().childData.get(lDone).alignmentBitmask = Bits.ALIGNMENT_HORIZONTAL_CENTER;
         h.getState().childData.get(lName).expandRatio = 1f;
         h.getState().styles = Arrays.asList("v-touchkit-navbutton");
-        refresh(h);
+        refresh(h, lName, lDone, lEpmty);
 
         return h;
-    };    
+    };
+    
+    static boolean injected = false;
+    private void injectStyles() {
+        if (!injected) {
+            StyleInjector.inject(".tokka-row {margin-bottom: 10px} .tokka-done{background:grey; color: white; text-align: center; border-radius: 50px}");
+            injected = true;
+        }
+    }    
 
 }
