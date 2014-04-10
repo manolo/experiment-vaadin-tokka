@@ -16,5 +16,4 @@
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-noserver -war src/main/webapp/VAADIN/widgetsets org.apache.hupa.vaadin.gwt.AppWidgetSet -startupUrl http://localhost:8080/vaadin-tokka"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="vaadin-tokka"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx512M -XX:MaxPermSize=256M"/>
-<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="/Users/manolo/james/hupa-mobile"/>
 </launchConfiguration>
