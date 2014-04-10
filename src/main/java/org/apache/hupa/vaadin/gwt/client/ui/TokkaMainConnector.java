@@ -7,6 +7,7 @@ import org.apache.hupa.vaadin.gwt.client.model.Tokka;
 import org.apache.hupa.vaadin.ui.TokkaMain;
 
 import com.google.gwt.dom.client.StyleInjector;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
@@ -24,14 +25,12 @@ import com.vaadin.client.ui.AbstractHasComponentsConnector;
 import com.vaadin.client.ui.button.ButtonConnector;
 import com.vaadin.client.ui.label.LabelConnector;
 import com.vaadin.client.ui.orderedlayout.HorizontalLayoutConnector;
-import com.vaadin.server.Page;
 import com.vaadin.shared.ui.AlignmentInfo.Bits;
 import com.vaadin.shared.ui.Connect;
 import com.vaadin.shared.ui.label.LabelState;
 import com.vaadin.shared.ui.orderedlayout.AbstractOrderedLayoutState;
 import com.vaadin.shared.ui.orderedlayout.AbstractOrderedLayoutState.ChildComponentData;
 import com.vaadin.shared.ui.orderedlayout.HorizontalLayoutState;
-import com.vaadin.ui.Alignment;
 
 @Connect(TokkaMain.class)
 public class TokkaMainConnector extends AbstractComponentContainerConnector {
@@ -127,12 +126,15 @@ public class TokkaMainConnector extends AbstractComponentContainerConnector {
         for (final Tokka t: Tokka.getTokkaDb()) {
             HorizontalLayoutConnector h = createRow(t.getName(), t.getDone(), t.getTotal());
             addComponent(content, h);
+            System.err.println("------ " + h.getWidget().getClass() + " " + (h.getWidget() instanceof HasClickHandlers));
+//            h.getWidget().add
 //            h.addLayoutClickListener(new LayoutClickListener() {
 //                public void layoutClick(LayoutClickEvent event) {
 //                    getNavigationManager().navigateTo(new TokkaTodoView(t));                
 //                }
 //            });
         }
+        
         addComponents(navigationViewConnector, navigationBarConnector, content);
     }
 
